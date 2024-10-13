@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { UploadIcon } from "@heroicons/react/solid"; // Make sure to install Heroicons
+import { CloudUploadIcon, CheckCircleIcon } from "@heroicons/react/solid";
+import { CircularProgress } from "@mui/material"; // For loading spinner
 
 const UploadDocument = ({
   handleSubmit,
@@ -8,113 +9,110 @@ const UploadDocument = ({
   loading,
   fileUploaded,
 }) => {
-  const [dragActive, setDragActive] = useState(false); // State to track drag activity
+  const [dragging, setDragging] = useState(false);
 
-  const handleDragOver = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setDragActive(true); // Set drag active on drag over
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setDragging(true);
   };
 
-  const handleDragLeave = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setDragActive(false); // Set drag inactive on drag leave
+  const handleDragLeave = () => {
+    setDragging(false);
   };
 
-  const handleDrop = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setDragActive(false); // Remove drag active state on drop
-    const droppedFile = event.dataTransfer.files[0];
-    if (droppedFile) {
-      handleFileChange({ target: { files: [droppedFile] } }); // Mimic input file change
-    }
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragging(false);
+    const files = e.dataTransfer.files;
+    handleFileChange({ target: { files } });
   };
 
   return (
-    <div
-      className="flex flex-col items-center bg-white shadow-lg py-20 px-10 rounded-lg w-full mx-auto transition-transform transform hover:scale-105"
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-    >
-      <form
-        onSubmit={handleSubmit}
-        className={`flex flex-col items-center w-full space-y-8 transition duration-300 ${
-          dragActive ? "border-2 border-dashed border-purple-500" : ""
-        }`}
-      >
-        {/* File input with drag-and-drop functionality */}
-        <label
-          htmlFor="file-upload"
-          className={`w-full flex flex-col items-center justify-center rounded-lg p-6 cursor-pointer transition duration-300 h-36 ${
-            dragActive
-              ? "bg-purple-100 border-purple-400"
-              : "bg-gray-100 border-gray-300 hover:bg-gray-200"
-          } border`}
+    <div className="bg-white pt-2 pb-10 px-20 rounded-lg shadow-xl w-full mx-auto text-center transition-all duration-300 ease-in-out hover:shadow-2xl relative">
+      <div className="steps-section grid grid-cols-1 sm:grid-cols-3 gap-8 my-12">
+        <div className="step-card text-center p-6 shadow-lg rounded-lg">
+          <img src="/upload.png" alt="Upload" className="h-16 mx-auto mb-4" />
+          <h3 className="text-xl font-bold">1. Upload Your Document</h3>
+          <p className="text-gray-600 mt-2">
+            Drag and drop your PDF or use the upload button to select a file.
+          </p>
+        </div>
+        <div className="step-card text-center p-6 shadow-lg rounded-lg">
+          <img src="/process.png" alt="Process" className="h-16 mx-auto mb-4" />
+          <h3 className="text-xl font-bold">2. AI Analyzes the Content</h3>
+          <p className="text-gray-600 mt-2">
+            Our AI processes the document and extracts valuable insights in
+            seconds.
+          </p>
+        </div>
+        <div className="step-card text-center p-6 shadow-lg rounded-lg">
+          <img src="/report.png" alt="Report" className="h-16 mx-auto mb-4" />
+          <h3 className="text-xl font-bold">3. Get Your Summary</h3>
+          <p className="text-gray-600 mt-2">
+            Receive a detailed summary, including key points, data, and more.
+          </p>
+        </div>
+      </div>
+
+      {/* File Upload Area and Form */}
+      <form onSubmit={handleSubmit}>
+        <div
+          className={`border-dashed border-4 rounded-lg p-6 transition-all ${
+            dragging ? "border-purple-700 bg-purple-50" : "border-gray-300"
+          }`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
         >
-          <UploadIcon className="h-12 w-12 text-purple-600 mb-2" />
-          <span className="text-gray-500 text-xl font-medium text-center">
-            {file
-              ? `Selected File: ${file.name}`
-              : "Click or Drag & Drop to upload your PDF file"}
-          </span>
+          <CloudUploadIcon className="h-16 w-16 text-purple-600 mx-auto mb-4" />
+          <h2 className="text-2xl font-semibold mb-2 text-purple-800">
+            Drag & Drop your PDF
+          </h2>
+          <p className="text-gray-600 mb-4 text-xl">
+            or click to select a file
+          </p>
           <input
-            id="file-upload"
             type="file"
-            accept=".pdf"
             onChange={handleFileChange}
             className="hidden"
+            id="file-upload"
           />
-        </label>
+          <label
+            htmlFor="file-upload"
+            className="text-xl cursor-pointer bg-purple-100 text-purple-700 py-2 px-4 rounded-lg hover:bg-purple-200 transition"
+          >
+            Browse Files
+          </label>
+        </div>
 
-        {/* Submit button */}
+        {/* Upload button */}
         <button
           type="submit"
-          disabled={!file || loading}
-          className={`bg-purple-800 text-white text-xl font-medium py-3 px-6 rounded-lg transition duration-300 ease-in-out ${
-            loading
-              ? "cursor-not-allowed opacity-50"
-              : "hover:bg-purple-900 hover:shadow-lg"
+          className={`py-3 px-6 mt-6 text-xl bg-purple-600 text-white rounded-lg shadow-lg hover:bg-purple-700 transition-all duration-300 flex items-center justify-center mx-auto ${
+            !fileUploaded && "opacity-50 cursor-not-allowed"
           }`}
+          disabled={!fileUploaded || loading}
         >
           {loading ? (
-            <div className="flex items-center justify-center space-x-2">
-              {/* Tailwind spinner */}
-              <svg
-                className="animate-spin h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                ></path>
-              </svg>
-              <span>Processing...</span>
+            <div className="flex items-center space-x-2">
+              <CircularProgress color="inherit" size={20} />
+              <span>Processing...</span>{" "}
+              {/* Add Loading text next to spinner */}
             </div>
           ) : (
-            "Generate Summary"
+            "Submit Document"
           )}
         </button>
       </form>
 
-      {/* Success message */}
-      {fileUploaded && (
-        <p className="mt-4 text-purple-700 text-xl font-medium">
-          File uploaded successfully: {file.name}
-        </p>
+      {/* Feedback: Success or Error */}
+      {fileUploaded && !loading && (
+        <div className="mt-4">
+          <CheckCircleIcon className="text-purple-500 h-8 w-8 inline-block" />
+          <span className="ml-2 text-purple-600 font-semibold text-xl">
+            File uploaded successfully! Your document is being processed.
+          </span>
+        </div>
       )}
     </div>
   );

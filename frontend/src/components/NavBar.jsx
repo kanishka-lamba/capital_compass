@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function NavBar({ handleScroll }) {
   const [scrolled, setScrolled] = React.useState(false);
@@ -19,7 +20,7 @@ function NavBar({ handleScroll }) {
 
   return (
     <div
-      className={`bg-purple-800 fixed top-0 w-full h-16 z-50 transition-shadow duration-500 shadow-purple-400 ${
+      className={`bg-purple-600 fixed top-0 w-full h-16 z-50 transition-shadow duration-500 shadow-purple-400 ${
         scrolled ? "shadow-2xl" : "shadow-lg"
       }`}
     >
@@ -30,7 +31,7 @@ function NavBar({ handleScroll }) {
             <li className="p-2 hover:bg-gray-200 rounded-md">
               {/* Call handleScroll function to scroll to the respective section */}
               <button onClick={() => handleScroll("header-section")}>
-                Home
+                <Link to="/">Home</Link>
               </button>
             </li>
             <li className="p-2 hover:bg-gray-200 rounded-md">

@@ -3,7 +3,7 @@ import UploadDocument from "./UploadDocument";
 import SummaryReport from "./SummaryReport";
 import ProcessingCard from "./ProcessingCard";
 
-function HomePage() {
+function TrialPage() {
   const [file, setFile] = useState(null);
   const [summary, setSummary] = useState("");
   const [fileUploaded, setFileUploaded] = useState(false);
@@ -153,20 +153,14 @@ function HomePage() {
   };
 
   return (
-    <div className="mb-14 flex flex-col items-center justify-between">
-      <div className="hero-section text-center py-20 bg-gradient-to-r from-purple-400 via-pink-500 to-red-400 w-full">
-        <h1 className="text-5xl font-bold text-white mb-4">
-          Analyze Your PDF Documents Effortlessly
-        </h1>
-        <p className="text-lg text-white mb-8">
-          Upload your PDF files and get instant summaries and insights with our
-          AI-powered tool.
-        </p>
-        <button className="bg-white text-purple-700 py-3 px-6 rounded-lg shadow-lg hover:bg-gray-100 transition duration-300">
-          Get Started
-        </button>
-      </div>
-      <div className="w-full px-4 mt-8">
+    <div className="mx-40 mt-10 flex flex-col items-center justify-between">
+      <h2 className="text-4xl font-bold mt-10 text-gray-700">
+        Upload Your Document
+      </h2>
+      <p className="text-xl text-gray-500 mt-2 mb-4">
+        Get instant summaries and key insights from your PDFs.
+      </p>
+      <div className="w-full px-4">
         <UploadDocument
           handleSubmit={handleSubmit}
           handleFileChange={handleFileChange}
@@ -183,7 +177,7 @@ function HomePage() {
         ) : (
           summary && (
             <div>
-              <SummaryReport analysisData={newSum} />
+              <SummaryReport analysisData={summary} />
             </div>
           )
         )}
@@ -192,4 +186,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default TrialPage;
