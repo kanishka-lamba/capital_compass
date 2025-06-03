@@ -58,14 +58,14 @@ const UploadDocument = ({
       <form onSubmit={handleSubmit}>
         <div
           className={`border-dashed border-4 rounded-lg p-6 transition-all ${
-            dragging ? "border-purple-700 bg-purple-50" : "border-gray-300"
+            dragging ? "border-purple-950 bg-purple-50" : "border-gray-300"
           }`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <CloudUploadIcon className="h-16 w-16 text-purple-600 mx-auto mb-4" />
-          <h2 className="text-2xl font-semibold mb-2 text-purple-800">
+          <CloudUploadIcon className="h-16 w-16 text-purple-950 mx-auto mb-4" />
+          <h2 className="text-2xl font-semibold mb-2 text-purple-950">
             Drag & Drop your PDF
           </h2>
           <p className="text-gray-600 mb-4 text-xl">
@@ -79,7 +79,7 @@ const UploadDocument = ({
           />
           <label
             htmlFor="file-upload"
-            className="text-xl cursor-pointer bg-purple-100 text-purple-700 py-2 px-4 rounded-lg hover:bg-purple-200 transition"
+            className="text-xl cursor-pointer bg-purple-100 text-purple-950 py-2 px-4 rounded-lg hover:bg-purple-200 transition"
           >
             Browse Files
           </label>
@@ -88,7 +88,7 @@ const UploadDocument = ({
         {/* Upload button */}
         <button
           type="submit"
-          className={`py-3 px-6 mt-6 text-xl bg-purple-600 text-white rounded-lg shadow-lg hover:bg-purple-700 transition-all duration-300 flex items-center justify-center mx-auto ${
+          className={`py-3 px-6 mt-6 text-xl bg-purple-950 text-white rounded-lg shadow-lg hover:bg-purple-800 transition-all duration-300 flex items-center justify-center mx-auto ${
             !fileUploaded && "opacity-50 cursor-not-allowed"
           }`}
           disabled={!fileUploaded || loading}
@@ -108,8 +108,8 @@ const UploadDocument = ({
       {/* Feedback: Success or Error */}
       {fileUploaded && !loading && (
         <div className="mt-4">
-          <CheckCircleIcon className="text-purple-500 h-8 w-8 inline-block" />
-          <span className="ml-2 text-purple-600 font-semibold text-xl">
+          <CheckCircleIcon className="text-purple-950 h-8 w-8 inline-block" />
+          <span className="ml-2 text-purple-950 font-semibold text-xl">
             File uploaded successfully! Your document is being processed.
           </span>
         </div>
