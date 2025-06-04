@@ -20,11 +20,6 @@ function NavBar({ handleScroll }) {
             <li className="py-2 px-4 hover:bg-[#FFD700] hover:text-gray-900 rounded-md">
               <button onClick={() => handleScroll("demo-section")}>Demo</button>
             </li>
-            <li className="py-2 px-4 hover:bg-[#FFD700] hover:text-gray-900 rounded-md">
-              <button onClick={() => handleScroll("about-section")}>
-                About
-              </button>
-            </li>
           </ul>
         </nav>
       </div>

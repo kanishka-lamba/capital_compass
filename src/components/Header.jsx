@@ -3,14 +3,12 @@ import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 
 export const Header = () => {
-  // Ref for the section to track when it's in view
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, {
     triggerOnce: false,
     margin: "-100px",
   });
 
-  // Animation Variants
   const textVariant = {
     hidden: { opacity: 0, y: -50 },
     visible: { opacity: 1, y: 0 },
@@ -23,7 +21,6 @@ export const Header = () => {
 
   return (
     <div className="px-4 py-10" ref={sectionRef}>
-      {/* Animated Heading */}
       <motion.p
         className="text-center font-semibold text-6xl text-[#E0E0E0]"
         variants={textVariant}
@@ -36,7 +33,6 @@ export const Header = () => {
         that makes angel investing smarter and easier 🚀
       </motion.p>
 
-      {/* Animated Subheading */}
       <motion.p
         className="text-center font-semibold text-2xl my-10 text-[#D1D5DB]"
         variants={textVariant}
@@ -48,7 +44,6 @@ export const Header = () => {
         recommendations for your angel investment decisions.
       </motion.p>
 
-      {/* Animated Buttons */}
       <motion.div
         className="flex justify-center space-x-8"
         variants={buttonVariant}
@@ -61,9 +56,13 @@ export const Header = () => {
             Start Free Trial
           </button>
         </Link>
-        <button className="text-2xl bg-transparent text-[#FFD700] border border-[#FFD700] font-medium py-3 px-6 rounded-lg shadow-lg hover:bg-[#FFD700] hover:text-gray-900 transition duration-300">
+        <a
+          className="text-2xl bg-transparent text-[#FFD700] border border-[#FFD700] font-medium py-3 px-6 rounded-lg shadow-lg hover:bg-[#FFD700] hover:text-gray-900 transition duration-300"
+          href="https://www.loom.com/share/4a9ffcca70204ea7974cf168cb1e4fa2"
+          target="blank"
+        >
           Watch the Demo
-        </button>
+        </a>
       </motion.div>
     </div>
   );

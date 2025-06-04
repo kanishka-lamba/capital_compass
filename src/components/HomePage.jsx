@@ -9,7 +9,6 @@ function HomePage() {
     margin: "-100px",
   });
 
-  // Animation Variants
   const textVariant = {
     hidden: { opacity: 0, y: -50 },
     visible: { opacity: 1, y: 0 },
@@ -22,34 +21,29 @@ function HomePage() {
 
   return (
     <div
-      className="mb-14 flex flex-col items-center justify-between" // Gradient background
-      ref={sectionRef} // Attach ref to track scrolling
+      className="mb-14 flex flex-col items-center justify-between"
+      ref={sectionRef}
     >
       <div className="hero-section text-center py-20">
-        {/* Animated Heading */}
         <motion.h1
-          className="text-5xl font-bold text-[#E0E0E0] mb-4" // Light Gray text
+          className="text-5xl font-bold text-[#E0E0E0] mb-4"
           variants={textVariant}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          Analyze Your PDF Documents Effortlessly
+          Analyze Your Pitch Deck Effortlessly
         </motion.h1>
-
-        {/* Animated Subheading */}
         <motion.p
-          className="text-lg text-[#D1D5DB] mb-8" // Soft light gray for subheading
+          className="text-lg text-[#D1D5DB] mb-8"
           variants={textVariant}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           transition={{ duration: 1, delay: 0.4 }}
         >
-          Upload your PDF files and get instant summaries and insights with our
-          AI-powered tool.
+          Upload your pitch deck and get insightful, efficient, and data-driven
+          angel investment decisions.
         </motion.p>
-
-        {/* Animated Button */}
         <motion.div
           variants={buttonVariant}
           initial="hidden"

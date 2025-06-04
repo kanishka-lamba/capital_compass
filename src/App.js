@@ -10,7 +10,6 @@ function App() {
   // Refs for each section
   const headerRef = useRef(null);
   const demoRef = useRef(null);
-  const aboutRef = useRef(null);
 
   // Function to handle scrolling
   const handleScroll = (section) => {
@@ -18,8 +17,6 @@ function App() {
       headerRef.current.scrollIntoView({ behavior: "smooth" });
     } else if (section === "demo-section" && demoRef.current) {
       demoRef.current.scrollIntoView({ behavior: "smooth" });
-    } else if (section === "about-section" && aboutRef.current) {
-      aboutRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -48,11 +45,6 @@ function App() {
                   >
                     <HomePage />
                   </section>
-                  <section
-                    id="about-section"
-                    ref={aboutRef}
-                    className="min-h-screen flex items-center justify-center pt-20 mx-36"
-                  ></section>
                 </div>
               </div>
             }
